@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZeroState : MonoBehaviour, ItemState
+public class PixelState : MonoBehaviour, ItemState
 {
     private MoveAction moveAction = new MoveAction();
     int ItemState.GetLevel() {
-        return 0;
+        return 1;
     }
 
     int ItemState.GetSize() {
-        return 1;
+        return 10;
     }
 
     void ItemState.Move(float speed) {
         moveAction.Straight(transform, speed);
-        moveAction.Rotate(transform, 2);
+        moveAction.Rotate(transform, 1);
     }
 }

@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class ItemGeneretor : MonoBehaviour
 {
+    private readonly float GENERATE_Y_RANGE = 4f;
+    private readonly float SPEED_COEFFICIENT_BY_LEVEL = 1f;
+    private readonly float SCALE_COEFFICIENT_BY_LEVEL = 0.5f;
+    private readonly float GABARAGE_POSITOIN = -25f;
+
     private List<GameObject> items = new List<GameObject>();
-    
+    private GameObject gameManager;
+    private GameManager gameManagerComponent;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.GetGameObject();
+        gameManagerComponent = GameManager.GetInstance();
         var itemNameList = new List<string>();
         var prefabList = new List<GameObject>();
-        itemNameList = Const.Const.ItemLevels[0];
+        itemNameList = Const.ItemConst.ItemLevels[gameManagerComponent.level];
         foreach(var itemName in itemNameList) {
             prefabList.Add((GameObject)Resources.Load ("Prefabs/" + itemName));
         }
@@ -29,32 +38,31 @@ public class ItemGeneretor : MonoBehaviour
         while(true) {
             var prefab = prefabList[Random.Range(0, prefabList.Count)];
             var instancedItem = Instantiate (prefab);
-            instancedItem.transform.parent = transform;
-            instancedItem.transform.position = transform.localPosition;
-            instancedItem.transform.Translate(0, Random.Range(-4f, 4f), 0);
             var state = instancedItem.GetComponent<ItemState>();
             var SpriteRenderer = instancedItem.GetComponent<SpriteRenderer>();
             var controller = instancedItem.GetComponent<ItemController>();
-            var gameManager = GameObject.Find("GameManager");
-            var gameManagerComponent = gameManager.GetComponent<GameManager>();
+
+            // set item position
+            instancedItem.transform.parent = transform;
+            instancedItem.transform.position = transform.localPosition;
+            instancedItem.transform.Translate(0, Random.Range(-GENERATE_Y_RANGE, GENERATE_Y_RANGE), 0);
+            //  define item state
+            controller.speed = controller.speed / (state.GetLevel() + SPEED_COEFFICIENT_BY_LEVEL);
+            controller.scale = controller.scale * (state.GetLevel() + SCALE_COEFFICIENT_BY_LEVEL);
             if (state.GetLevel() > gameManagerComponent.level) {
-                // instancedItem.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                controller.scale = 1f;
-                SpriteRenderer.color = Color.red;
+                SpriteRenderer.color = Const.ColorConst.RED;
             } else {
-                controller.scale = 0.5f;
-                // instancedItem.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                SpriteRenderer.color = Color.blue;
+                SpriteRenderer.color = Const.ColorConst.BLUE;
             }
             items.Add(instancedItem);
-            
-            for (int i = items.Count - 1; i >= 0; i--) {
-                var item = items[i];
-                if (item != null && item.transform.position.x < -25f) {
+            // collect gabarage items
+            foreach (var item in items) {
+                if (item != null && item.transform.position.x < GABARAGE_POSITOIN) {
                     Destroy(item);
                 }
             }
-            yield return new WaitForSeconds(1);
+            // waiting
+            yield return new WaitForSeconds(1f);
         }
     }
 }

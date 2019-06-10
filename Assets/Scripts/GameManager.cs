@@ -5,6 +5,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameObject GetGameObject() 
+    {
+        return GameObject.Find("GameManager");
+    }
+
+    public static GameManager GetInstance() 
+    {
+        return GetGameObject().GetComponent<GameManager>();
+    }
+
     public float time;
     private GameObject timerText;
 

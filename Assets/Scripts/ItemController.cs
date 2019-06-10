@@ -33,8 +33,10 @@ public class ItemController : MonoBehaviour
         if (gameManagerComponent.level >= state.GetLevel()) {
             gameManagerComponent.size += state.GetSize();
             gameManagerComponent.time += ADD_TIME;
+            gameManagerComponent.itemGetSound.PlayOneShot(gameManagerComponent.itemGetSound.clip);
         } else {
             gameManagerComponent.time -= DECREASE_TIME;
+            gameManagerComponent.damageSound.PlayOneShot(gameManagerComponent.damageSound.clip);
         }
         Destroy(gameObject);
     }

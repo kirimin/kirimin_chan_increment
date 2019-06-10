@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OneState : MonoBehaviour, ItemState
+public class OneOneState : MonoBehaviour, ItemState
 {
     private MoveAction moveAction = new MoveAction();
     int ItemState.GetLevel() {
@@ -10,7 +10,7 @@ public class OneState : MonoBehaviour, ItemState
     }
 
     int ItemState.GetSize() {
-        return 1;
+        return 3;
     }
 
     void ItemState.Move(float speed) {

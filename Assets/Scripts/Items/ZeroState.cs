@@ -15,6 +15,6 @@ public class ZeroState : MonoBehaviour, ItemState
 
     void ItemState.Move(float speed) {
         moveAction.Straight(transform, speed);
-        moveAction.Rotate(transform, 2);
+        // moveAction.Rotate(transform, 2);
     }
 }

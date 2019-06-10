@@ -8,13 +8,28 @@ namespace Const
     {
         private static readonly string ONE = "One";
         private static readonly string ZERO = "Zero";
-        private static readonly string PIXEL = "Pixel";        
+        private static readonly string ONE_ONE = "OneOne";
+        private static readonly string ONE_ZERO = "OneZero";
+        private static readonly string PIXEL = "Pixel";
         private static readonly string MI = "Mi";
 
         public static readonly List<List<string>> ItemLevels = new List<List<string>>
         {
             new List<string> {
-                ONE, ONE, ONE, ONE, ONE, ONE, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, PIXEL, PIXEL, MI
+                ONE, ONE, ONE, ONE, ONE, ONE, ONE, ONE, ONE,
+                ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO,
+                ONE_ONE, ONE_ONE,
+                ONE_ZERO, ONE_ZERO,
+                PIXEL, PIXEL,
+                MI
+            },
+            new List<string> {
+                ONE,
+                ZERO,
+                ONE_ONE,
+                ONE_ZERO,
+                PIXEL, PIXEL, PIXEL, PIXEL,
+                MI, MI, MI, MI, MI, MI, MI, MI
             }
         };
     }

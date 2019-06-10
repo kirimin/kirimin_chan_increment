@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemController : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] float scale;
+    public float scale;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,14 @@ public class ItemController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D c) {
+        var state = GetComponent<ItemState>();
+        var gameManager = GameObject.Find("GameManager");
+        var gameManagerComponent = gameManager.GetComponent<GameManager>();
+        if (gameManagerComponent.level >= state.GetLevel()) {
+            gameManagerComponent.size += state.GetSize();
+        } else {
+            gameManagerComponent.time -= 10;
+        }
         Destroy(gameObject);
     }
 }

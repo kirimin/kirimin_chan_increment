@@ -5,14 +5,21 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private float time;
+    public float time;
     private GameObject timerText;
+
+    public int level;
+    public int size;
+    private GameObject sizeText;
 
     // Start is called before the first frame update
     void Start()
     {
         timerText = GameObject.Find("TimerText");
         time = 60;
+        level = 0;
+        sizeText = GameObject.Find("SizeText");
+        size = 1;
     }
 
     // Update is called once per frame
@@ -20,5 +27,6 @@ public class GameManager : MonoBehaviour
     {
         time = time - Time.deltaTime;
         timerText.GetComponent<Text>().text = ((int)time).ToString();
+        sizeText.GetComponent<Text>().text = size.ToString() + "byte";
     }
 }

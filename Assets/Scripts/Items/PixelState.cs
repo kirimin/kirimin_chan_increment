@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PixelState : MonoBehaviour, ItemState
 {
@@ -10,7 +8,7 @@ public class PixelState : MonoBehaviour, ItemState
     }
 
     int ItemState.GetSize() {
-        return 10;
+        return 8;
     }
 
     void ItemState.Move(float speed) {

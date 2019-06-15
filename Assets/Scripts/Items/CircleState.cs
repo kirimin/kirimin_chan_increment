@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 
-public class OneState : MonoBehaviour, ItemState
+public class CircleState : MonoBehaviour, ItemState
 {
     private MoveAction moveAction = new MoveAction();
     int ItemState.GetLevel() {
-        return 0;
+        return 1;
     }
 
     int ItemState.GetSize() {
-        return 1;
+        return 20;
     }
 
     void ItemState.Move(float speed) {
         moveAction.Straight(transform, speed);
+        moveAction.Rotate(transform, 1);
     }
 }

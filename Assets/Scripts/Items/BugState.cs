@@ -1,34 +1,28 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NnState : MonoBehaviour, ItemState
+public class BugState : MonoBehaviour, ItemState
 {
-    private bool isUp;
-    private int count;
-
-    void Start() {
-        isUp = Random.Range(0, 2) == 0 ? true : false;
-    }
-
     private MoveAction moveAction = new MoveAction();
+     private bool isUp;
+    private int count;
+    
     int ItemState.GetLevel() {
-        return 2;
+        return 5;
     }
 
     int ItemState.GetSize() {
-        return 80;
+        return 520;
     }
 
     void ItemState.Move(float speed) {
         moveAction.Straight(transform, speed);
-        moveAction.Rotate(transform, 1);
         if (isUp) {
             moveAction.Up(transform, 0.05f);
         } else {
             moveAction.Down(transform, 0.05f);
         }
         count++;
-        if (count == 30) {
+        if (count == 60) {
             count = 0;
             isUp = Random.Range(0, 2) == 0 ? true : false;
         }

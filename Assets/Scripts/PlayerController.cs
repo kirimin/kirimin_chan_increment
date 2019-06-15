@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float speed;
+    private float speed;
 
     private GameObject background;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 0.1f;
+        speed = 0.125f;
         background = GameObject.Find("BackGroundHolder");
     }
 
@@ -22,6 +20,6 @@ public class PlayerController : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         transform.Translate(x * speed, y * speed, 0);
-        background.transform.Translate(x * -speed / 25, y * -speed / 50, 0);
+        background.transform.Translate(x * -speed / 20, y * -speed / 25, 0);
     }
 }

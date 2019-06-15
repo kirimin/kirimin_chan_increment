@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -17,23 +15,25 @@ public class GameManager : MonoBehaviour
 
     public AudioSource itemGetSound;
     public AudioSource damageSound;
+    public AudioSource comboSound;
     public AudioSource levelUpSound;
     public float time;
     public int level;
     public int size;
+    public int comboCount = 0;
 
-    private GameObject sizeText;
-    private GameObject timerText;
-    private GameObject levelText;
-    private GameObject nextText;
+    private Text sizeText;
+    private Text timerText;
+    private Text levelText;
+    private Text nextText;
 
     // Start is called before the first frame update
     void Start()
     {
-        timerText = GameObject.Find("TimerText");
-        levelText = GameObject.Find("LevelText");
-        sizeText = GameObject.Find("SizeText");
-        nextText = GameObject.Find("NextText");
+        timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        sizeText = GameObject.Find("SizeText").GetComponent<Text>();
+        nextText = GameObject.Find("NextText").GetComponent<Text>();
         time = 60;
         size = 1;
         level = 0;
@@ -41,16 +41,17 @@ public class GameManager : MonoBehaviour
         itemGetSound = sources[0];
         damageSound = sources[1];
         levelUpSound = sources[2];
+        comboSound = sources[3];
     }
 
     // Update is called once per frame
     void Update()
     {
         time = time - Time.deltaTime;
-        timerText.GetComponent<Text>().text = ((int)time).ToString();
-        sizeText.GetComponent<Text>().text = size.ToString() + "byte";
-        levelText.GetComponent<Text>().text = level.ToString();
-        nextText.GetComponent<Text>().text = Level.GetNext(level).ToString() + "byte";
+        timerText.text = ((int)time).ToString();
+        sizeText.text = size.ToString() + "byte";
+        levelText.text = level.ToString();
+        nextText.text = Level.GetNext(level).ToString() + "byte";
         var currentLevel = level;
         level = Level.getLevel(size);
         if (currentLevel != level) {
@@ -58,6 +59,10 @@ public class GameManager : MonoBehaviour
             var generatorComponent = itemGenerator.GetComponent<ItemGeneretor>();
             generatorComponent.ClaerAllItems();
             levelUpSound.PlayOneShot(levelUpSound.clip);
+            var effect = (GameObject)Resources.Load ("Prefabs/Effects/LevelUpEffect");
+            effect.transform.position = transform.position;
+            Destroy(Instantiate(effect),effect.GetComponent<ParticleSystem>().main.duration);
+
         }
     }
 }

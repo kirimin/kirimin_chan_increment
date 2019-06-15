@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    private readonly int DECREASE_TIME = 10;
+    private readonly int DECREASE_TIME = 15;
     private readonly int ADD_TIME = 1;
     public float speed;
     public float scale;

@@ -13,6 +13,8 @@ namespace Const
         private static readonly string PIXEL = "Pixel";
         private static readonly string MI = "Mi";
 
+        private static readonly string NN = "Nn";
+
         public static readonly List<List<string>> ItemLevels = new List<List<string>>
         {
             new List<string> {
@@ -24,13 +26,14 @@ namespace Const
                 MI
             },
             new List<string> {
-                ONE,
-                ZERO,
                 ONE_ONE,
                 ONE_ZERO,
-                PIXEL, PIXEL, PIXEL, PIXEL,
-                MI, MI, MI, MI, MI, MI, MI, MI
-            }
+                PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL,
+                MI, MI, MI, MI, NN, NN, NN
+            },
+            new List<string> {
+                
+            } 
         };
     }
 

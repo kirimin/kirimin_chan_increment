@@ -5,9 +5,10 @@ using UnityEngine;
 public class ItemGeneretor : MonoBehaviour
 {
     private readonly float GENERATE_Y_RANGE = 5f;
-    private readonly float SPEED_COEFFICIENT_BY_LEVEL = 0.9f;
-    private readonly float SCALE_COEFFICIENT_BY_LEVEL = 0.5f;
+    private readonly float SPEED_COEFFICIENT_BY_LEVEL = 0.8f;
+    private readonly float SCALE_COEFFICIENT_BY_LEVEL = 0.75f;
     private readonly float GABARAGE_POSITOIN = -10f;
+    private readonly float ITEM_GENERATE_WAITING = 0.3f;
 
     private List<GameObject> items = new List<GameObject>();
     private GameObject gameManager;
@@ -57,9 +58,6 @@ public class ItemGeneretor : MonoBehaviour
     private IEnumerator GenerateItem(List<GameObject> prefabList, int level) 
     {
         while(true) {
-            // if (level != gameManagerComponent.level) {
-            //     yield break;
-            // }
             var prefab = prefabList[Random.Range(0, prefabList.Count)];
             var instancedItem = Instantiate (prefab);
             var state = instancedItem.GetComponent<ItemState>();
@@ -86,7 +84,7 @@ public class ItemGeneretor : MonoBehaviour
                 }
             }
             // waiting
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(ITEM_GENERATE_WAITING);
         }
     }
 }

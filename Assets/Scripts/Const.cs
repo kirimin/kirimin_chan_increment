@@ -12,8 +12,9 @@ namespace Const
         private static readonly string ONE_ZERO = "OneZero";
         private static readonly string PIXEL = "Pixel";
         private static readonly string MI = "Mi";
-
         private static readonly string NN = "Nn";
+        private static readonly string VOID_START = "voidStart";
+        private static readonly string VOID_UPDATE = "voidUpdate";
 
         public static readonly List<List<string>> ItemLevels = new List<List<string>>
         {
@@ -23,13 +24,18 @@ namespace Const
                 ONE_ONE, ONE_ONE,
                 ONE_ZERO, ONE_ZERO,
                 PIXEL, PIXEL,
-                MI
+                MI, NN
             },
             new List<string> {
-                ONE_ONE,
-                ONE_ZERO,
-                PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL,
-                MI, MI, MI, MI, NN, NN, NN
+                ZERO,
+                ONE, 
+                ONE_ONE, ONE_ONE,
+                ONE_ZERO, ONE_ZERO,
+                PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, 
+                PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL,
+                PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL, PIXEL,
+                MI, MI, MI, MI, MI, NN, NN, NN, NN,
+                VOID_START, VOID_UPDATE
             },
             new List<string> {
                 

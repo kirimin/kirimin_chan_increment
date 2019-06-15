@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private GameObject sizeText;
     private GameObject timerText;
     private GameObject levelText;
+    private GameObject nextText;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         timerText = GameObject.Find("TimerText");
         levelText = GameObject.Find("LevelText");
         sizeText = GameObject.Find("SizeText");
+        nextText = GameObject.Find("NextText");
         time = 60;
         size = 1;
         level = 0;
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
         timerText.GetComponent<Text>().text = ((int)time).ToString();
         sizeText.GetComponent<Text>().text = size.ToString() + "byte";
         levelText.GetComponent<Text>().text = level.ToString();
+        nextText.GetComponent<Text>().text = Level.GetNext(level).ToString() + "byte";
         var currentLevel = level;
         level = Level.getLevel(size);
         if (currentLevel != level) {

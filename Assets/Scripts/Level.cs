@@ -8,8 +8,8 @@ public static class Level
     public static readonly List<int> levelRanges = new List<int> {
         0,
         100,
-        500,
-        1000
+        1000,
+        5000
     };
 
     public static int getLevel(int size) {
@@ -18,7 +18,10 @@ public static class Level
                 return i;
             }
         }
-        Debug.Log("return 0");
         return 0;
+    }
+
+    public static int GetNext(int level) {
+        return levelRanges[level + 1];
     }
 }

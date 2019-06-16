@@ -13,8 +13,6 @@ public class ItemGeneretor : MonoBehaviour
     private List<GameObject> items = new List<GameObject>();
     private GameObject gameManager;
     private GameManager gameManagerComponent;
-
-    private int currentLevel;
     private Coroutine coroutine;
 
     // Start is called before the first frame update
@@ -22,17 +20,13 @@ public class ItemGeneretor : MonoBehaviour
     {
         gameManager = GameManager.GetGameObject();
         gameManagerComponent = GameManager.GetInstance();
+        gameManagerComponent.levelUpEvent.AddListener(CreateCoroutine);
         CreateCoroutine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentLevel != gameManagerComponent.level) {
-            CreateCoroutine();
-            currentLevel = gameManagerComponent.level;
-            return;
-        }
     }
 
     public void ClaerAllItems() {

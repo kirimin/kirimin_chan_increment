@@ -13,6 +13,5 @@ public class OneZeroState : MonoBehaviour, ItemState
 
     void ItemState.Move(float speed) {
         moveAction.Straight(transform, speed);
-        // moveAction.Rotate(transform, 2);
     }
 }

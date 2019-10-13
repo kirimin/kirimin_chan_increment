@@ -51,7 +51,12 @@ public class ItemController : MonoBehaviour
         if (gameManagerComponent.size >= state.GetCanTakePlayerSize()) {
             gameManagerComponent.size += state.GetRewardSize();
             gameManagerComponent.updateSizeEvent.Invoke();
-            gameManagerComponent.itemGetSound.PlayOneShot(gameManagerComponent.itemGetSound.clip);
+            gameManagerComponent.itemGetEvent.Invoke();
+            if (Random.Range(0, 2) == 0) {
+                gameManagerComponent.itemGetSound.PlayOneShot(gameManagerComponent.itemGetSound.clip);
+            } else {
+                gameManagerComponent.itemGetSound.PlayOneShot(gameManagerComponent.itemGetSound2.clip);
+            }
             gameManagerComponent.comboCount++;
             if (gameManagerComponent.comboCount == 10) {
                 gameManagerComponent.time += ADD_TIME;
@@ -71,6 +76,7 @@ public class ItemController : MonoBehaviour
             gameManagerComponent.time -= DECREASE_TIME;
             gameManagerComponent.damageSound.PlayOneShot(gameManagerComponent.damageSound.clip);
             gameManagerComponent.comboCount = 0;
+            gameManagerComponent.damageEvent.Invoke();
         }
         Destroy(gameObject);
     }

@@ -16,10 +16,14 @@ public class GameManager : MonoBehaviour
         return GetGameObject().GetComponent<GameManager>();
     }
 
+    public GameObject player;
     public UnityEvent levelUpEvent;
     public UnityEvent gameoverEvent;
     public UnityEvent updateSizeEvent;
+    public UnityEvent itemGetEvent;
+    public UnityEvent damageEvent;
     public AudioSource itemGetSound;
+    public AudioSource itemGetSound2;
     public AudioSource damageSound;
     public AudioSource comboSound;
     public AudioSource levelUpSound;
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
         gameoverEvent.AddListener(OnGameOver);
         updateSizeEvent = new UnityEvent();
         updateSizeEvent.AddListener(OnSizeChange);
+        player = GameObject.Find("kirimin-chan");
         timerText = GameObject.Find("TimerText").GetComponent<Text>();
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
         sizeText = GameObject.Find("SizeText").GetComponent<Text>();
@@ -52,6 +57,7 @@ public class GameManager : MonoBehaviour
         comboCount = 0;
         var sources = GetComponents<AudioSource>();
         itemGetSound = sources[0];
+        itemGetSound2 = sources[4];
         damageSound = sources[1];
         levelUpSound = sources[2];
         comboSound = sources[3];

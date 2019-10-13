@@ -5,9 +5,10 @@ public static class Level
     
     public static readonly List<int> levelRanges = new List<int> {
         0,
-        100,
-        1000,
-        5000
+        128,
+        1024,
+        8000,
+        32000
     };
 
     public static int getLevel(int size) {

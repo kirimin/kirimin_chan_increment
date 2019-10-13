@@ -5,8 +5,6 @@ using UnityEngine;
 public class ItemGeneretor : MonoBehaviour
 {
     private readonly float GENERATE_Y_RANGE = 5f;
-    private readonly float SPEED_COEFFICIENT_BY_LEVEL = 0.8f;
-    private readonly float SCALE_COEFFICIENT_BY_LEVEL = 0.75f;
     private readonly float GABARAGE_POSITOIN = -10f;
     private readonly float ITEM_GENERATE_WAITING = 0.3f;
 
@@ -62,14 +60,6 @@ public class ItemGeneretor : MonoBehaviour
             instancedItem.transform.parent = transform;
             instancedItem.transform.position = transform.localPosition;
             instancedItem.transform.Translate(0, Random.Range(-GENERATE_Y_RANGE, GENERATE_Y_RANGE), 0);
-            //  define item state
-            controller.speed = controller.speed * SPEED_COEFFICIENT_BY_LEVEL / (state.GetLevel() + 1) * (gameManagerComponent.level + 1);
-            controller.scale = controller.scale * SCALE_COEFFICIENT_BY_LEVEL * (state.GetLevel() + 1) / (gameManagerComponent.level + 1);
-            if (state.GetLevel() > gameManagerComponent.level) {
-                SpriteRenderer.color = Const.ColorConst.RED;
-            } else {
-                SpriteRenderer.color = Const.ColorConst.BLUE;
-            }
             items.Add(instancedItem);
             // collect gabarage items
             foreach (var item in items) {

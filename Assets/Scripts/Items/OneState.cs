@@ -3,11 +3,16 @@
 public class OneState : MonoBehaviour, ItemState
 {
     private MoveAction moveAction = new MoveAction();
+
     int ItemState.GetLevel() {
         return 0;
     }
 
-    int ItemState.GetSize() {
+    int ItemState.GetCanTakePlayerSize() {
+        return 0;
+    }
+
+    int ItemState.GetRewardSize() {
         return 1;
     }
 

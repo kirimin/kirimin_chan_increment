@@ -2,7 +2,9 @@
 {
     int GetLevel();
 
-    int GetSize();
+    int GetCanTakePlayerSize();
+
+    int GetRewardSize();
 
     void Move(float speed);
 }

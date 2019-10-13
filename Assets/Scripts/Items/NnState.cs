@@ -11,11 +11,16 @@ public class NnState : MonoBehaviour, ItemState
     }
 
     private MoveAction moveAction = new MoveAction();
+
     int ItemState.GetLevel() {
         return 2;
     }
 
-    int ItemState.GetSize() {
+    int ItemState.GetCanTakePlayerSize() {
+        return 900;
+    }
+
+    int ItemState.GetRewardSize() {
         return 80;
     }
 

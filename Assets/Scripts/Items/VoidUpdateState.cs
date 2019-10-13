@@ -3,11 +3,16 @@
 public class VoidUpdateState : MonoBehaviour, ItemState
 {
     private MoveAction moveAction = new MoveAction();
+
     int ItemState.GetLevel() {
         return 3;
     }
 
-    int ItemState.GetSize() {
+    int ItemState.GetCanTakePlayerSize() {
+        return 6000;
+    }
+
+    int ItemState.GetRewardSize() {
         return 50;
     }
 

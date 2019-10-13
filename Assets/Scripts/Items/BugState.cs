@@ -10,8 +10,12 @@ public class BugState : MonoBehaviour, ItemState
         return 5;
     }
 
-    int ItemState.GetSize() {
-        return 520;
+    int ItemState.GetCanTakePlayerSize() {
+        return 8000;
+    }
+
+    int ItemState.GetRewardSize() {
+        return 320;
     }
 
     void ItemState.Move(float speed) {

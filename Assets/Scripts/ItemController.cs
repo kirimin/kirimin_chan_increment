@@ -4,31 +4,53 @@ public class ItemController : MonoBehaviour
 {
     private readonly int DECREASE_TIME = 10;
     private readonly int ADD_TIME = 5;
-    public float speed;
-    public float scale;
+    private readonly float SPEED_COEFFICIENT_BY_LEVEL = 0.5f;
+    private readonly float SCALE_COEFFICIENT_BY_LEVEL = 0.75f;
+    [SerializeField] float speed;
+    [SerializeField] float scale;
     private GameObject gameManager;
     private GameManager gameManagerComponent;
+    private SpriteRenderer spriteRenderer;
     private ItemState state;
+    private Vector3 localScale;
+    private float actualSpeed;
+    private float actualScale;
+
+    public void UpdateState() {
+        actualSpeed = speed * SPEED_COEFFICIENT_BY_LEVEL / (state.GetLevel() + 1) * (gameManagerComponent.level + 1);
+        actualScale = scale * SCALE_COEFFICIENT_BY_LEVEL * (state.GetLevel() + 1) / (gameManagerComponent.level + 1);
+        
+        transform.localScale = new Vector3(localScale.x * actualScale, localScale.y * actualScale, localScale.z * actualScale);
+        if (state.GetCanTakePlayerSize() > gameManagerComponent.size) {
+            spriteRenderer.color = Const.ColorConst.RED;
+        } else {
+            spriteRenderer.color = Const.ColorConst.BLUE;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        localScale = transform.localScale;
         state = GetComponent<ItemState>();
         gameManager = GameManager.GetGameObject();
         gameManagerComponent = GameManager.GetInstance();
-        Vector3 defaultSize = transform.localScale;
-        transform.localScale = new Vector3(defaultSize.x * scale, defaultSize.y * scale, defaultSize.z * scale);
+        gameManagerComponent.updateSizeEvent.AddListener(UpdateState);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateState();
     }
 
     // Update is called once per frame
     void Update()
     {
-        state.Move(speed);
+        state.Move(actualSpeed);
     }
 
     void OnTriggerEnter2D(Collider2D c) {
-        if (gameManagerComponent.level >= state.GetLevel()) {
-            gameManagerComponent.size += state.GetSize();
+        if (gameManagerComponent.size >= state.GetCanTakePlayerSize()) {
+            gameManagerComponent.size += state.GetRewardSize();
+            gameManagerComponent.updateSizeEvent.Invoke();
             gameManagerComponent.itemGetSound.PlayOneShot(gameManagerComponent.itemGetSound.clip);
             gameManagerComponent.comboCount++;
             if (gameManagerComponent.comboCount == 10) {

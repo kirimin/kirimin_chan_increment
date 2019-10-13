@@ -2,12 +2,17 @@
 
 public class CircleState : MonoBehaviour, ItemState
 {
-    private MoveAction moveAction = new MoveAction();
+
     int ItemState.GetLevel() {
         return 1;
     }
 
-    int ItemState.GetSize() {
+    private MoveAction moveAction = new MoveAction();
+    int ItemState.GetCanTakePlayerSize() {
+        return 120;
+    }
+
+    int ItemState.GetRewardSize() {
         return 20;
     }
 

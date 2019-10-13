@@ -4,16 +4,22 @@ public class MiState : MonoBehaviour, ItemState
 {
     private bool isUp;
 
+
     void Start() {
         isUp = Random.Range(0, 2) == 0 ? true : false;
     }
 
     private MoveAction moveAction = new MoveAction();
+
     int ItemState.GetLevel() {
         return 2;
     }
 
-    int ItemState.GetSize() {
+    int ItemState.GetCanTakePlayerSize() {
+        return 800;
+    }
+
+    int ItemState.GetRewardSize() {
         return 50;
     }
 

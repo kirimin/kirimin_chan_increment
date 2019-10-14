@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
         return GetGameObject().GetComponent<GameManager>();
     }
 
+    public Camera mainCamera;
     public GameObject player;
     public UnityEvent levelUpEvent;
     public UnityEvent gameoverEvent;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         levelUpEvent = new UnityEvent();
         levelUpEvent.AddListener(OnLevelUp);
         gameoverEvent = new UnityEvent();

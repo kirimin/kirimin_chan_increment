@@ -32,7 +32,20 @@ public class PlayerController : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-
+        Vector3 topLeft = gameManagerComponent.mainCamera.ScreenToWorldPoint(Vector3.zero);
+        Vector3 bottomRight = gameManagerComponent.mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
+        if (transform.position.x < topLeft.x && x < 0) {
+            x = 0;
+        }
+        if (transform.position.y < topLeft.y && y < 0) {
+            y = 0;
+        }
+        if (transform.position.x > bottomRight.x && x > 0) {
+            x = 0;
+        }
+        if (transform.position.y > bottomRight.y && y > 0) {
+            y = 0;
+        }
         transform.Translate(x * speed, y * speed, 0);
         background.transform.Translate(x * -speed / 20, y * -speed / 25, 0);
         if (Input.GetKeyDown(KeyCode.Z)) {

@@ -19,6 +19,7 @@ public class ItemGeneretor : MonoBehaviour
         gameManager = GameManager.GetGameObject();
         gameManagerComponent = GameManager.GetInstance();
         gameManagerComponent.levelUpEvent.AddListener(CreateCoroutine);
+        gameManagerComponent.useBombEvent.AddListener(ClearAllObjects);
         CreateCoroutine();
     }
 
@@ -69,6 +70,13 @@ public class ItemGeneretor : MonoBehaviour
             }
             // waiting
             yield return new WaitForSeconds(ITEM_GENERATE_WAITING);
+        }
+    }
+
+    private void ClearAllObjects() {
+        // collect gabarage items
+        foreach (var item in items) {
+            Destroy(item);
         }
     }
 }

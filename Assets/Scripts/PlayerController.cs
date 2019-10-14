@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(x * speed, y * speed, 0);
         background.transform.Translate(x * -speed / 20, y * -speed / 25, 0);
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            UseBomb();
+        }
     }
 
     private void ChangeToDamageSprite() {
@@ -45,5 +48,17 @@ public class PlayerController : MonoBehaviour
     private void ChangeToNomalSprite() {
         animator.enabled = true;
         spriteRenderer.sprite = nomalSprite;
+    }
+
+    private void UseBomb() {
+            gameManagerComponent.useBombEvent.Invoke();
+            gameManagerComponent.bombSound.PlayOneShot(gameManagerComponent.bombSound.clip);
+            var effect = (GameObject)Resources.Load ("Prefabs/Effects/BombEffect");
+            effect.transform.position = transform.position;
+            Destroy(Instantiate(effect),effect.GetComponent<ParticleSystem>().main.duration);
+
+            double newSize = gameManagerComponent.size * 0.5;
+            gameManagerComponent.size = (int) newSize;
+            gameManagerComponent.updateSizeEvent.Invoke();
     }
 }

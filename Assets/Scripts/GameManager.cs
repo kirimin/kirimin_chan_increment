@@ -22,11 +22,13 @@ public class GameManager : MonoBehaviour
     public UnityEvent updateSizeEvent;
     public UnityEvent itemGetEvent;
     public UnityEvent damageEvent;
+    public UnityEvent useBombEvent;
     public AudioSource itemGetSound;
     public AudioSource itemGetSound2;
     public AudioSource damageSound;
     public AudioSource comboSound;
     public AudioSource levelUpSound;
+    public AudioSource bombSound;
     public float time;
     public int level;
     public int size;
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
         damageSound = sources[1];
         levelUpSound = sources[2];
         comboSound = sources[3];
+        bombSound = sources[5];
     }
 
     // Update is called once per frame
